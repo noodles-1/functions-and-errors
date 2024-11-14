@@ -25,7 +25,7 @@ contract ErrorHandling {
 
     function testRevert(uint num) public pure {
         if (num <= 100)
-            revert("Input must be greater than 10");
+            revert("Input must be greater than 100");
     }
 
     uint num2;
