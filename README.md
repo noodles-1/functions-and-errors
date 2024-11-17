@@ -4,7 +4,7 @@ This Solidity program applies the error handling techniques such as `require()`,
 
 ## Description
 
-The program features 3 functions, `borrowBooks()`, `authenticateAdmin()`, and `summateNums()` to implement the error handling functions on Solidity. The `borrowBooks()` function will let the user borrow only 1 to 5 books per day. The `authenticateAdmin()` will authenticate the user if the username and password are correct. Lastly, the `summateNums()` will first assert that total is equals to 0 before adding all numbers from 1 to 10.
+The program features 3 functions, `borrowBooks1()`, `borrowBooks2()`, and `summateNums()` to implement the error handling functions on Solidity. The `borrowBooks1()` function will let the user borrow only 1 to 5 books per day using the `require()` function. The `borrowBooks2()` will also let the user borrow only 1 to 5 books using the `revert()` function. Lastly, the `summateNums()` will first assert that total is equals to 0 before adding all numbers from 1 to 10.
 
 ## Getting Started
 
@@ -19,18 +19,18 @@ Once you are on the Remix website, create a new file by clicking on the "+" icon
 pragma solidity >= 0.8.7;
 
 contract ErrorHandling {
-    function borrowBooks(uint numBooks) public pure {
+    function borrowBooks1(uint numBooks) public pure {
         require(0 < numBooks && numBooks <= 5, "Number of books to be borrowed must only be 1 to 5.");
     }
 
-    function authenticateAdmin(string username, string password) public pure {
-        if (username != "admin" && password != "admin123")
-            revert("Invalid username or password.")
+    function borrowBooks2(uint numBooks) public pure {
+        if (numBooks <= 0 || numBooks > 5)
+            revert("Number of books to be borrowed must only be 1 to 5.");
     }
 
     uint total;
 
-    function summateNums() public view {
+    function summateNums() public {
         assert(total == 0);
 
         for(uint i = 1; i <= 10; i++) {
