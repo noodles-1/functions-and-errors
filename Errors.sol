@@ -2,18 +2,22 @@
 pragma solidity >= 0.8.7;
 
 contract ErrorHandling {
-    function testRequire(uint num) public pure {
-        require(num > 100, "Input must be greater than 100");
+    function borrowBooks(uint numBooks) public pure {
+        require(0 < numBooks && numBooks <= 5, "Number of books to be borrowed must only be 1 to 5.");
     }
 
-    function testRevert(uint num) public pure {
-        if (num <= 100)
-            revert("Input must be greater than 100");
+    function authenticateAdmin(string username, string password) public pure {
+        if (username != "admin" && password != "admin123")
+            revert("Invalid username or password.")
     }
 
-    uint num2;
+    uint total;
 
-    function testAssert() public view {
-        assert(num2 == 0);
+    function summateNums() public view {
+        assert(total == 0);
+
+        for(uint i = 1; i <= 10; i++) {
+            total += i;
+        }
     }
 }
